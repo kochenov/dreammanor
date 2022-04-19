@@ -1,14 +1,7 @@
 <template>
   <header class="header">
     <div class="wrap">
-      <div class="logo-wrap">
-        <div class="logo">
-          <router-link to="/">
-            <img src="@/assets/images/logo.png" alt="" />
-          </router-link>
-          <span>УСАДЬБА МЕЧТЫ</span>
-        </div>
-      </div>
+      <div class="logo-wrap"><LogoHeader /></div>
       <div class="nav-wrap">
         <MainMenu />
       </div>
@@ -17,7 +10,8 @@
 </template>
 <script>
 import MainMenu from "../block/navigation/MainMenu.vue";
-export default { components: { MainMenu } };
+import LogoHeader from "../block/logo/LogoHeader.vue";
+export default { components: { MainMenu, LogoHeader } };
 </script>
 <style lang="scss" scoped>
 .header {
@@ -31,34 +25,6 @@ export default { components: { MainMenu } };
   background-repeat: no-repeat;
   background-position-y: bottom;
   margin-bottom: 1px;
-
-  // Логотип
-  .logo {
-    background-color: $top-header-background;
-    padding-top: 16px;
-    font-weight: 600;
-    height: 100%;
-    width: 100%;
-
-    a {
-      display: block;
-      margin: 0 auto;
-      height: 84px;
-      max-width: 180px;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-    }
-
-    span {
-      text-align: center;
-      display: block;
-      padding-bottom: 10px;
-    }
-  }
 
   .wrap {
     display: grid;
