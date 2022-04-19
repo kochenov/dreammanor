@@ -1,0 +1,83 @@
+// Размер экрана под мобилные
+$sm: 576px;
+// Планшеты
+$md: 768px;
+// Небольшие экраны
+$lg: 992px;
+// экран Ноутбука
+$xl: 1400px;
+// Большие экраны
+$xxl: 1600px;
+
+// установка адаптивности, параметр размера экрана
+@mixin screen-size($size) {
+    // Для экранов смартфонов
+    @if $size==sm {
+        @media (max-width: $sm) {
+            @content;
+        }
+    }
+
+    // Для планшетов
+    @else if $size==md {
+        @media (max-width: $md) {
+            @content;
+        }
+    }
+
+    // Для маленьких экранов ноутбуков
+    @else if $size==lg {
+        @media (max-width: $lg) {
+            @content;
+        }
+    }
+
+    // Для средних экранов ноутбуков (мой стандарт)
+    @else if $size==xl {
+        @media (max-width: $xl) {
+            @content;
+        }
+    }
+
+    // Устройства X-Large (большие настольные компьютеры, менее 1400 пикселей)
+    @else if $size==xxl {
+        @media (max-width: $xxl) {
+            @content;
+        }
+    }
+}
+
+.wrap {
+    max-width: calc(1600px - 50px * 2);
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    // Для ПК и больших экранов
+    @include screen-size(xxl) {
+        max-width: calc(1440px - 10px * 2);
+    }
+
+    // Для ноутбуков
+    @include screen-size(xl) {
+        max-width: calc(1400px - 32px * 2);
+    }
+
+    //
+    @include screen-size(lg) {
+        max-width: 100%;
+    }
+
+    //
+    @include screen-size(md) {
+        max-width: 100%;
+    }
+
+    //
+    @include screen-size(sm) {
+        max-width: 100%;
+    }
+}
