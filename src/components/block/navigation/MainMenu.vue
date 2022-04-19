@@ -447,6 +447,7 @@ export default {
     height: 80px;
     font-weight: 600;
     font-size: 11px;
+    overflow: hidden;
     @include screen-size(xl) {
       font-size: 9px;
     }
