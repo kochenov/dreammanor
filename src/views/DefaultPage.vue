@@ -1,5 +1,7 @@
 <template>
-  <div>{{ $route.matched[0].meta }}</div>
+  <div>
+    <pre>{{ $route.matched[0].meta }}</pre>
+  </div>
 </template>
 
 <script>
