@@ -6,7 +6,7 @@ export default [
       layout: "index",
       parent: "home",
     },
-    component: () => import("../views/HomePage.vue"),
+    component: () => import("../views/DefaultPage.vue"),
   },
   {
     path: "/blogers/top",
@@ -25,7 +25,7 @@ export default [
         },
       ],
     },
-    component: () => import("../views/HomePage.vue"),
+    component: () => import("../views/DefaultPage.vue"),
   },
   {
     path: "/video/top",
@@ -44,7 +44,7 @@ export default [
         },
       ],
     },
-    component: () => import("../views/HomePage.vue"),
+    component: () => import("../views/DefaultPage.vue"),
   },
   {
     path: "/communities",
@@ -59,7 +59,7 @@ export default [
         },
       ],
     },
-    component: () => import("../views/HomePage.vue"),
+    component: () => import("../views/DefaultPage.vue"),
   },
   {
     path: "/authors/register",
@@ -78,7 +78,7 @@ export default [
         },
       ],
     },
-    component: () => import("../views/HomePage.vue"),
+    component: () => import("../views/DefaultPage.vue"),
   },
   {
     path: "/news",
@@ -97,7 +97,7 @@ export default [
         },
       ],
     },
-    component: () => import("../views/NewsPage.vue"),
+    component: () => import("../views/DefaultPage.vue"),
   },
   {
     path: "/news/action",
@@ -116,7 +116,7 @@ export default [
         },
       ],
     },
-    component: () => import("../views/NewsPage.vue"),
+    component: () => import("../views/DefaultPage.vue"),
   },
   {
     name: "newUsers",
@@ -135,7 +135,7 @@ export default [
         },
       ],
     },
-    component: () => import("../views/NewsPage.vue"),
+    component: () => import("../views/DefaultPage.vue"),
   },
   {
     path: "/records",
@@ -150,12 +150,67 @@ export default [
         },
       ],
     },
-    component: () => import("../views/HomePage.vue"),
+    component: () => import("../views/DefaultPage.vue"),
   },
   {
     path: "/about",
     name: "about",
     meta: {
+      parent: "about",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/contacts",
+    name: "contacts",
+    meta: {
+      parent: "about",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/for-partners",
+    name: "for-partners",
+    meta: {
+      parent: "about",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/for-authors",
+    name: "for-authors",
+    meta: {
+      parent: "about",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/author/new",
+    name: "author-new",
+    meta: {
+      parent: "about",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/feedback",
+    name: "feedback",
+    meta: {
+      parent: "about",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/rules",
+    name: "rules",
+    meta: {
+      parent: "about",
       layout: "index",
     },
     component: () => import("../views/DefaultPage.vue"),
@@ -164,6 +219,43 @@ export default [
     path: "/bulletin-board",
     name: "bulletinBoard",
     meta: {
+      parent: "bulletinBoard",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/real-estate",
+    name: "real-estate",
+    meta: {
+      parent: "bulletinBoard",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/production",
+    name: "production",
+    meta: {
+      parent: "bulletinBoard",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/animals",
+    name: "animals",
+    meta: {
+      parent: "bulletinBoard",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/board-add",
+    name: "board-add",
+    meta: {
+      parent: "bulletinBoard",
       layout: "index",
     },
     component: () => import("../views/DefaultPage.vue"),
@@ -177,16 +269,108 @@ export default [
     component: () => import("../views/DefaultPage.vue"),
   },
   {
+    path: "/posts",
+    name: "posts",
+    meta: {
+      layout: "index",
+      parent: "blogs",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/blogers-list",
+    name: "blogersList",
+    meta: {
+      layout: "index",
+      parent: "blogs",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/blogers",
+    name: "blogers",
+    meta: {
+      layout: "index",
+      parent: "blogs",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/create-add-blog",
+    name: "createAddBlog",
+    meta: {
+      layout: "index",
+      parent: "blogs",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
     path: "/articles",
     name: "articles",
     meta: {
+      parent: "articles",
       layout: "index",
     },
     component: () => import("../views/DefaultPage.vue"),
   },
   {
-    path: "/seeding",
+    path: "/articles/useful",
+    name: "articlesUseful",
+    meta: {
+      parent: "articles",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/articles/vegetable-garden-and-garden",
+    name: "articlesVegetableGardenAndGarden",
+    meta: {
+      parent: "articles",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/articles/animal-husbandry",
+    name: "AnimalHusbandry",
+    meta: {
+      parent: "articles",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/articles/create",
+    name: "articlesCreate",
+    meta: {
+      parent: "articles",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/calculation/seeding",
     name: "seeding",
+    meta: {
+      layout: "index",
+      parent: "seeding",
+      breadcrumbs: [
+        {
+          name: "Расчёты",
+          url: "/calculation",
+        },
+        {
+          name: "Калькулятор посева томатов / выращивание томатов по технологии",
+          url: "/seeding",
+        },
+      ],
+    },
+    component: () => import("../views/SeedingPage.vue"),
+  },
+  {
+    path: "/calculation/feed",
+    name: "calculationFeed",
     meta: {
       layout: "index",
       parent: "seeding",
@@ -204,9 +388,102 @@ export default [
     component: () => import("../views/SeedingPage.vue"),
   },
   {
-    path: "/сalendars",
-    name: "calendars",
+    path: "/calculation/weight-control",
+    name: "calculationWeightControl",
     meta: {
+      layout: "index",
+      parent: "seeding",
+      breadcrumbs: [
+        {
+          name: "Расчёты",
+          url: "/seeding",
+        },
+        {
+          name: "Контроль веса",
+          url: "/seeding",
+        },
+      ],
+    },
+    component: () => import("../views/SeedingPage.vue"),
+  },
+  {
+    path: "/calculation/bisnes-plans",
+    name: "calculationBisnesPlans",
+    meta: {
+      layout: "index",
+      parent: "seeding",
+      breadcrumbs: [
+        {
+          name: "Расчёты",
+          url: "/seeding",
+        },
+        {
+          name: "Контроль веса",
+          url: "/seeding",
+        },
+      ],
+    },
+    component: () => import("../views/SeedingPage.vue"),
+  },
+  {
+    path: "/calculation/all-users",
+    name: "calculationAllUsers",
+    meta: {
+      layout: "index",
+      parent: "seeding",
+      breadcrumbs: [
+        {
+          name: "Расчёты",
+          url: "/seeding",
+        },
+        {
+          name: "Контроль веса",
+          url: "/seeding",
+        },
+      ],
+    },
+    component: () => import("../views/SeedingPage.vue"),
+  },
+  {
+    path: "/сalendars",
+    name: "сalendars",
+    meta: {
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/task-list",
+    name: "taskList",
+    meta: {
+      parent: "сalendars",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/recomendations",
+    name: "recomendations",
+    meta: {
+      parent: "сalendars",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/user-tasks",
+    name: "userTasks",
+    meta: {
+      parent: "сalendars",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/add-task",
+    name: "addTask",
+    meta: {
+      parent: "сalendars",
       layout: "index",
     },
     component: () => import("../views/DefaultPage.vue"),
@@ -216,6 +493,51 @@ export default [
     name: "account",
     meta: {
       layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/login",
+    name: "login",
+    meta: {
+      parent: "account",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/registration",
+    name: "registration",
+    meta: {
+      parent: "account",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/lk",
+    name: "lk",
+    meta: {
+      parent: "account",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/notifications",
+    name: "notifications",
+    meta: {
+      parent: "account",
+      layout: "index",
+    },
+    component: () => import("../views/DefaultPage.vue"),
+  },
+  {
+    path: "/logout",
+    name: "logout",
+    meta: {
+      layout: "index",
+      parent: "account",
     },
     component: () => import("../views/DefaultPage.vue"),
   },
