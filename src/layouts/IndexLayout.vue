@@ -1,36 +1,42 @@
 <template>
   <div>
-    <header class="header">
-      <div class="wrap header__wrap">
-        <div class="header__logo-wrap">
-          <div class="logo">
-            <a class="logo-link" href="#">
-              <img src="@assets/img/logo.png" alt="" />
-            </a>
-            <span>УСАДЬБА МЕЧТЫ</span>
-          </div>
-        </div>
-        <div class="header__nav-wrap">
-          <MainMenu />
-        </div>
-      </div>
-    </header>
+    <HeaderPart />
 
     <PromoLink />
-    <Breadcrumbs />
+    <BreadcrumbsNav />
     <router-view />
   </div>
 </template>
 <script>
-import PromoLink from "@/components/main/PromoLink";
-import Breadcrumbs from "@/components/main/Breadcrumbs";
-import MainMenu from "@/components/block/navigation/MainMenu.vue";
+import PromoLink from "@/components/parts/PromoLink.vue";
+import BreadcrumbsNav from "@/components/parts/BreadcrumbsNav.vue";
+import HeaderPart from "@/components/parts/HeaderPart.vue";
+
 export default {
   name: "IndexLayout",
   components: {
     PromoLink,
-    Breadcrumbs,
-    MainMenu,
+    BreadcrumbsNav,
+    HeaderPart,
   },
 };
 </script>
+<style lang="scss">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,200;0,300;0,400;0,600;0,800;1,300;1,500&display=swap");
+
+html {
+  font-size: 1px;
+}
+
+body {
+  font-family: $font-text;
+  background-color: $top-header-background;
+  font-size: 14rem;
+}
+</style>
