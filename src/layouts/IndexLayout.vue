@@ -39,4 +39,11 @@ body {
   background-color: $top-header-background;
   font-size: 14rem;
 }
+
+a,
+button,
+input[type="button"],
+input[type="submit"] {
+  transition: 0.3s;
+}
 </style>
