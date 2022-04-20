@@ -46,4 +46,20 @@ input[type="button"],
 input[type="submit"] {
   transition: 0.3s;
 }
+
+.page {
+  display: grid;
+  grid-template-areas: "page-main sidebar";
+  grid-template-columns: 1fr 380px;
+  grid-template-rows: minmax(500px, 100%);
+  gap: 30px;
+}
+
+.page-main {
+  grid-area: page-main;
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
 </style>
