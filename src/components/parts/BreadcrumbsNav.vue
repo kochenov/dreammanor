@@ -30,6 +30,9 @@ export default {
 
 <style lang="scss" scoped>
 .breadcrumbs {
+  @include screen-size(sm) {
+    display: none;
+  }
   ul {
     padding: 16px 0;
     margin-left: 40px;
@@ -40,6 +43,10 @@ export default {
   li {
     position: relative;
     padding-left: 18px;
+    font-size: 14rem;
+    @include screen-size(xl) {
+      font-size: 11rem;
+    }
     &::after {
       content: url("~@/assets/images/icons/i-right.svg");
       position: absolute;
