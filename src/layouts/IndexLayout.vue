@@ -51,7 +51,16 @@ input[type="submit"] {
   display: grid;
   grid-template-areas: "page-main sidebar";
   grid-template-columns: 1fr 380px;
-  grid-template-rows: minmax(500px, 100%);
+  //grid-template-rows: minmax(500px, 100%);
+  @include screen-size(xl) {
+    grid-template-areas:
+      "page-main"
+      "sidebar";
+    grid-template-columns: 0.92fr;
+    justify-content: center;
+    //padding-right: 40px;
+  }
+
   gap: 30px;
 }
 
