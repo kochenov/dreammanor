@@ -78,6 +78,14 @@ export default {
     margin-left: 45px;
     align-items: center;
     margin-top: 30px;
+    @include screen-size(xl) {
+      margin-left: 0;
+    }
+    @include screen-size(lg) {
+      font-size: 18rem;
+      flex-direction: column-reverse;
+      gap: 30px;
+    }
 
     &-wrapper-tabs {
       .tab-link {
@@ -94,6 +102,12 @@ export default {
       font-size: 30rem;
       letter-spacing: 0em;
       position: relative;
+      @include screen-size(xl) {
+        font-size: 24rem;
+      }
+      @include screen-size(lg) {
+        font-size: 18rem;
+      }
     }
 
     &-link-tabs {
@@ -118,12 +132,26 @@ export default {
       -webkit-transition: 1s ease;
       transition: 1s ease;
       margin-left: 5px;
+      @include screen-size(xl) {
+        font-size: 12rem;
+      }
+      @include screen-size(lg) {
+        font-size: 16rem;
+      }
 
       &:hover {
         color: #fff;
         background-color: #06b25f;
         -webkit-transition: 0.5s ease;
         transition: 0.5s ease;
+      }
+    }
+
+    @mixin box() {
+      @include screen-size(lg) {
+        top: 0px;
+        left: -70px;
+        transform: rotate(0);
       }
     }
 
@@ -137,6 +165,7 @@ export default {
       transform: rotate(-90deg);
       padding: 4px;
       background-color: rgb(231, 14, 14);
+      @include box();
     }
 
     .box-popular:before {
@@ -151,6 +180,7 @@ export default {
       padding-left: 3px;
       padding-right: 3px;
       background-color: $green-dark;
+      @include box();
     }
 
     .box-new:before {
@@ -163,6 +193,7 @@ export default {
       transform: rotate(-90deg);
       padding: 4px;
       background-color: rgb(14, 90, 231);
+      @include box();
     }
   }
 
