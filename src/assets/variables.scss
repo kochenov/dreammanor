@@ -19,4 +19,44 @@ $white: #ffffff;
 // Top Panel Color Background
 $top-header-background: #f5faff;
 
+// Форма
+@mixin grup-label() {
+    .grup {
+        width: 100%;
+    }
+    label {
+        display: block;
+        font-size: 13rem;
+        padding: 8px 0;
+        font-weight: 600;
+    }
+}
+@mixin grup-input() {
+    input,
+    select {
+        font-size: 13rem;
+        padding: 10px 14px;
+        border: 1px solid #f0f0f0;
+        color: #000000;
+        width: 100%;
+    }
+    ::-webkit-input-placeholder {
+        color: #9a9ca5;
+    }
+
+    ::-moz-placeholder {
+        color: #9a9ca5;
+    }
+
+    /* Firefox 19+ */
+    :-moz-placeholder {
+        color: #9a9ca5;
+    }
+
+    /* Firefox 18- */
+    :-ms-input-placeholder {
+        color: #9a9ca5;
+    }
+}
+
 @import "sass/__adaptive.scss";
