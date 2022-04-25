@@ -2,7 +2,7 @@
   <div class="calc-seeding">
     <FleshMesseges :messages="messages" />
     <FleshMesseges
-      v-if="!errorDataApi"
+      v-if="errorDataApi"
       :messages="[
         'Не удалось получить данные с сервера! Проверьте интернет соединение...',
       ]"
@@ -11,10 +11,10 @@
       <RowInput>
         <SelectForm
           :modelValue="currentSort"
-          @update:modelValue="(e) => (currentSort = e)"
+          @update:modelValue="(e) => loadDataSorts(e)"
           :options="sorts"
-          name="Выбирите сорт томата"
-          idLabel="sort-tomat"
+          :name="'Выберите сорт овоща, ' + vegetable.name"
+          idLabel="sort"
         >
           <SelectOptionForm selected disabled value="default"
             >Сорт не выбран</SelectOptionForm
@@ -65,10 +65,9 @@
         />
       </RowInput>
       <BrnGroup>
-        <ButtonExp @click.prevent=""> Сделать расчёт </ButtonExp>
+        <ButtonExp @click.prevent="submitToResult"> Сделать расчёт </ButtonExp>
       </BrnGroup>
     </FormGrid>
-    {{ currentSort }}
   </div>
 </template>
 
@@ -81,24 +80,98 @@ import SelectForm from "@/components/ui/form/SelectForm.vue";
 import SelectOptionForm from "@/components/ui/form/SelectOptionForm.vue";
 import ButtonExp from "@/components/ui/ButtonExp.vue";
 import BrnGroup from "../../ui/Button/BrnGroup.vue";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "FormSeeding",
   data() {
     return {
       messages: [],
-      errorDataApi: false,
       loadingDataApi: true,
       currentSort: "default",
-      distanceBetweenRows: "50",
-      distanceBetweenBushes: "70",
+      distanceBetweenRows: "",
+      distanceBetweenBushes: "",
       bushes: "1",
       rows: "1",
-      sorts: [
-        { id: "1", name: "Sort 1" },
-        { id: "2", name: "Sort 2" },
-      ],
     };
+  },
+
+  computed: {
+    ...mapState({
+      errorDataApi: (state) => state.errorDataApi,
+    }),
+    ...mapGetters({
+      sorts: "getSorts",
+      vegetable: "getVegetable",
+    }),
+  },
+  methods: {
+    loadDataSorts(id) {
+      this.currentSort = id;
+      let sort = this.sorts.find((item) => item.id == id);
+      this.distanceBetweenRows = sort.distanceBetweenRows;
+      this.distanceBetweenBushes = sort.distanceBetweenBushes;
+    },
+
+    submitToResult() {
+      // Если все поля формы заполнены
+      if (
+        this.distanceBetweenRows !== "" &&
+        this.distanceBetweenBushes !== "" &&
+        this.bushes !== "" &&
+        this.rows !== ""
+      ) {
+        if (this.bushes >= this.rows) {
+          // Если кнопка не была ранее нажата
+          if (!this.result) {
+            // меняем состояние на нажатое
+            this.result = true;
+            // Очищаем список ошибок
+            this.message = "";
+          }
+          // Количество кустов в одном ряду
+          this.oneRows = Math.ceil(this.bushes / this.rows);
+          // Ширины грядки
+          this.width =
+            this.rows * this.distanceBetweenRows + this.distanceBetweenRows;
+          // Длины грядки
+          this.height =
+            this.oneRows * this.distanceBetweenBushes +
+            this.distanceBetweenBushes;
+          let сanvasEl = this.$refs.canvas;
+          сanvasEl.setAttribute("width", Math.ceil(this.height / 2));
+          // Растягиваем полотно по высоте
+          сanvasEl.setAttribute("height", Math.ceil(this.width / 2));
+          let canvas = сanvasEl.getContext("2d");
+          // Рисуем прямоугольник
+          canvas.strokeRect(
+            0,
+            0,
+            Math.ceil(this.height / 2),
+            Math.ceil(this.width / 2)
+          );
+          this.canvasRow(canvas);
+          setTimeout(() => {
+            this.$refs.canvasRow.scrollIntoView({
+              block: "start",
+              behavior: "smooth",
+            });
+          }, 1);
+        } else {
+          // Если не все поля заполнены выводим сообщение
+          this.message = [
+            "Количество рядов не должно превышать количество кустов!",
+          ];
+          // Меняем состояние
+          this.result = false;
+        }
+      } else {
+        // Если не все поля заполнены выводим сообщение
+        this.message = ["Пожалуйста, заполните все поля формы!"];
+        // Меняем состояние
+        this.result = false;
+      }
+    },
   },
   components: {
     FleshMesseges,
