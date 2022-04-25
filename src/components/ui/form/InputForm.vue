@@ -26,12 +26,12 @@ export default {
       default: null,
     },
     min: {
-      type: Number,
-      default: 1,
+      type: String,
+      default: "1",
     },
     max: {
-      type: Number,
-      default: 1000,
+      type: String,
+      default: "1000",
     },
     modelValue: [String, Number],
     typeInput: { type: String, default: "text" },
