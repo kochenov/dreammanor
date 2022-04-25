@@ -99,7 +99,7 @@ export default {
 
     &-title {
       font-family: Bitter;
-      font-size: 30rem;
+      font-size: 25rem;
       letter-spacing: 0em;
       position: relative;
       @include screen-size(xl) {
