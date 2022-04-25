@@ -1,23 +1,31 @@
 <template>
   <ul class="list-menu-link">
-    <li class="active"><a href="#">Посев томатов </a></li>
-    <li><a href="#">Посев Огурцов</a></li>
-    <li><a href="#">Посев перцев</a></li>
-    <li><a href="#">Посев баклажанов</a></li>
-    <li><a href="#">Посев кабачков</a></li>
-    <li><a href="#">Посев тыквы</a></li>
-    <li><a href="#">Посев моркови</a></li>
-    <li><a href="#">Посев редиса</a></li>
-    <li><a href="#">Посев свеклы</a></li>
-    <li><a href="#">Посев капусты</a></li>
-    <li><a href="#">Посев арбузов</a></li>
-    <li><a href="#">Посев картофеля</a></li>
+    <li
+      v-for="item in data"
+      :key="item.id"
+      :class="{ active: item.id == currentID }"
+    >
+      <a @click.prevent="$emit('setVegetableId', item.id)" href="#">{{
+        item.name
+      }}</a>
+    </li>
   </ul>
 </template>
 
 <script>
 export default {
   name: "ListVegetable",
+  props: {
+    data: {
+      type: Array,
+      default: () => {
+        return [];
+      },
+    },
+    currentID: {
+      type: [String, Number],
+    },
+  },
 };
 </script>
 
