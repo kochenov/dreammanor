@@ -1,5 +1,5 @@
 <template>
-  <button class="btn" :class="buttonType">
+  <button class="btn">
     <slot />
   </button>
 </template>
@@ -7,14 +7,6 @@
 <script>
 export default {
   name: "ButtonExp",
-  props: {
-    buttonType: {
-      type: String,
-      default: () => {
-        return "";
-      },
-    },
-  },
 };
 </script>
 
