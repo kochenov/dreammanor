@@ -24,7 +24,16 @@
             },
           ]"
         >
-          <ListVegetable />
+          <ListVegetable
+            @setVegetableId="
+              (e) => {
+                setVegetableId(e);
+              }
+            "
+            :data="vegetables"
+            :currentID="vegetableId"
+          />
+          {{ test }}
         </TabsWrap>
       </div>
     </aside>
@@ -37,6 +46,7 @@ import FormSeeding from "@/components/parts/seeding/FormSeeding.vue";
 import HistorySeeding from "@/components/parts/seeding/HistorySeeding.vue";
 import UserSeeding from "@/components/parts/seeding/UserSeeding.vue";
 import ListVegetable from "@/components/block/sidebar/ListVegetable.vue";
+import { mapActions, mapGetters, mapMutations, mapState } from "vuex";
 
 export default {
   name: "SeedingPage",
@@ -47,9 +57,19 @@ export default {
     UserSeeding,
     ListVegetable,
   },
+  computed: {
+    ...mapState({
+      vegetableId: (state) => state.seeding.vegetableId,
+      vegetables: (state) => state.seeding.vegetables,
+    }),
+    ...mapGetters({
+      //vegetable: "getVegetable",
+    }),
+  },
   data() {
     return {
       isComponent: "FormSeeding",
+      test: "",
       componens: [
         {
           nameComponent: "FormSeeding",
@@ -71,6 +91,17 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    ...mapActions({
+      loadVegetables: "loadVegetables",
+    }),
+    ...mapMutations({
+      setVegetableId: "setVegetableId",
+    }),
+  },
+  mounted() {
+    this.loadVegetables();
   },
 };
 </script>
