@@ -2,7 +2,7 @@
   <div v-if="messages.length > 0">
     <div
       class="flesh"
-      :class="type"
+      :class="[type, dop]"
       v-for="(message, index) in messages"
       :key="index"
     >
@@ -20,6 +20,7 @@
 <script>
 export default {
   name: "FlashMessages",
+
   props: {
     messages: {
       type: Array,
@@ -28,6 +29,9 @@ export default {
     type: {
       type: String,
       default: "error",
+    },
+    dop: {
+      type: String,
     },
   },
 };
@@ -51,5 +55,10 @@ export default {
 .aletr {
   color: rgb(220, 170, 30);
   border: 1px solid rgb(220, 170, 30);
+}
+.lite {
+  border: none;
+  padding: 0px 0px;
+  margin-bottom: 5px;
 }
 </style>

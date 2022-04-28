@@ -24,9 +24,9 @@ export default {
     return {
       num: 0,
       links: [
-        { url: "/", textLink: "Основная ссылка", textLinkOn: "Призыв" },
+        { url: "/", textLink: "TEST", textLinkOn: "Подпишитесь на Ютуб Канал" },
         {
-          url: "/seeding",
+          url: "/calculation/seeding",
           textLink: "Весна близко!",
           textLinkOn: " Планируй свой огород!",
         },

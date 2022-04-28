@@ -13,6 +13,9 @@ export default {};
   margin: 10px 0;
   display: flex;
   justify-content: center;
+  @include screen-size(sm) {
+    flex-wrap: wrap;
+  }
   gap: 20px;
 }
 </style>

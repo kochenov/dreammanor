@@ -14,6 +14,10 @@ export default {
 .btn {
   display: inline-block;
   padding: 12px 80px;
+  @include screen-size(sm) {
+    padding: 12px 0px;
+    width: 100%;
+  }
   //margin: 10px auto;
   font-size: 11px;
   font-weight: 600;
@@ -32,7 +36,6 @@ export default {
   }
 }
 .btn-outline {
-  padding: 8px 10px;
   background: none;
   border: 2px solid #06b25f;
   color: #06b25f;
@@ -50,5 +53,14 @@ export default {
     background: rgb(235, 135, 135) !important;
     border-color: rgb(235, 135, 135) !important;
   }
+}
+.btn-save {
+  padding: 5px 7px;
+}
+.btn-mini {
+  padding: 12px 25px;
+}
+.btn-modal {
+  padding: 6px 80px;
 }
 </style>

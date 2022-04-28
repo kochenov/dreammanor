@@ -27,9 +27,13 @@ export default {
     setVegetableId: (state, id) => {
       state.vegetableId = id;
     },
+    // Установка выбранного овоща
+    setErrorApi: (state, status) => {
+      state.errorDataApi = status;
+    },
   },
   actions: {
-    loadVegetables({ commit }, state) {
+    loadVegetables({ commit }) {
       axios({
         method: "GET",
         url: `http://127.0.0.1:8000/api/V1/vegetable`,
@@ -43,10 +47,13 @@ export default {
           commit("setVegetables", response.data.data);
         })
         .catch((error) => {
+          commit("setErrorApi", true); // Показать ошибку получения данных
           console.log(error);
-          state.errorDataApi = true; // Показать ошибку получения данных
         })
-        .finally(() => {});
+        .finally(() => {
+          //console.log(state.errorDataApi);
+          //commit("setErrorApi", false);
+        });
     },
   },
 };

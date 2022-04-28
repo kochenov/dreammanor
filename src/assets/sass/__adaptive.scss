@@ -55,6 +55,7 @@ $xxl: 1600px;
     margin-left: auto;
     margin-top: 0;
     margin-bottom: 0;
+    overflow: hidden;
 
     // Для ПК и больших экранов
     @include screen-size(xxl) {

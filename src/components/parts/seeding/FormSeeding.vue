@@ -68,6 +68,14 @@
         <ButtonExp @click.prevent="submitToResult"> Сделать расчёт </ButtonExp>
       </BrnGroup>
     </FormGrid>
+    <ResultSeeding
+      :bushes="Number(bushes)"
+      :distanceBetweenBushes="Number(distanceBetweenBushes)"
+      :distanceBetweenRows="Number(distanceBetweenRows)"
+      :rows="Number(rows)"
+      :active="active"
+      v-if="result"
+    />
   </div>
 </template>
 
@@ -81,9 +89,11 @@ import SelectOptionForm from "@/components/ui/form/SelectOptionForm.vue";
 import ButtonExp from "@/components/ui/ButtonExp.vue";
 import BrnGroup from "../../ui/Button/BrnGroup.vue";
 import { mapState, mapGetters } from "vuex";
+import ResultSeeding from "./results/ResultSeeding.vue";
 
 export default {
   name: "FormSeeding",
+
   data() {
     return {
       messages: [],
@@ -93,83 +103,78 @@ export default {
       distanceBetweenBushes: "",
       bushes: "1",
       rows: "1",
+      active: 1,
+      result: false,
     };
   },
 
   computed: {
     ...mapState({
-      errorDataApi: (state) => state.errorDataApi,
+      errorDataApi: (state) => state.seeding.errorDataApi,
     }),
     ...mapGetters({
       sorts: "getSorts",
       vegetable: "getVegetable",
     }),
   },
+  watch: {
+    active() {},
+  },
   methods: {
+    // Стабатывает при выборе сорта из select
     loadDataSorts(id) {
       this.currentSort = id;
       let sort = this.sorts.find((item) => item.id == id);
       this.distanceBetweenRows = sort.distanceBetweenRows;
       this.distanceBetweenBushes = sort.distanceBetweenBushes;
     },
-
-    submitToResult() {
-      // Если все поля формы заполнены
+    // Проверяет, что бы все поля были заполнены
+    validInputsEmpty() {
       if (
         this.distanceBetweenRows !== "" &&
         this.distanceBetweenBushes !== "" &&
         this.bushes !== "" &&
         this.rows !== ""
       ) {
-        if (this.bushes >= this.rows) {
-          // Если кнопка не была ранее нажата
-          if (!this.result) {
-            // меняем состояние на нажатое
-            this.result = true;
-            // Очищаем список ошибок
-            this.message = "";
-          }
-          // Количество кустов в одном ряду
-          this.oneRows = Math.ceil(this.bushes / this.rows);
-          // Ширины грядки
-          this.width =
-            this.rows * this.distanceBetweenRows + this.distanceBetweenRows;
-          // Длины грядки
-          this.height =
-            this.oneRows * this.distanceBetweenBushes +
-            this.distanceBetweenBushes;
-          let сanvasEl = this.$refs.canvas;
-          сanvasEl.setAttribute("width", Math.ceil(this.height / 2));
-          // Растягиваем полотно по высоте
-          сanvasEl.setAttribute("height", Math.ceil(this.width / 2));
-          let canvas = сanvasEl.getContext("2d");
-          // Рисуем прямоугольник
-          canvas.strokeRect(
-            0,
-            0,
-            Math.ceil(this.height / 2),
-            Math.ceil(this.width / 2)
-          );
-          this.canvasRow(canvas);
-          setTimeout(() => {
-            this.$refs.canvasRow.scrollIntoView({
-              block: "start",
-              behavior: "smooth",
-            });
-          }, 1);
-        } else {
-          // Если не все поля заполнены выводим сообщение
-          this.message = [
-            "Количество рядов не должно превышать количество кустов!",
-          ];
-          // Меняем состояние
-          this.result = false;
-        }
+        this.messages = [];
+        return true;
       } else {
-        // Если не все поля заполнены выводим сообщение
-        this.message = ["Пожалуйста, заполните все поля формы!"];
-        // Меняем состояние
+        this.messages = ["Пожалуйста, заполните все поля формы!"];
         this.result = false;
+        return false;
+      }
+    },
+    // Проверяет, что бы количество кустов небыло меньше количества рядов
+    validRowsbushes() {
+      if (this.bushes <= this.rows) {
+        this.messages = [];
+        return true;
+      } else {
+        this.messages = [
+          "Количество рядов не должно превышать количество кустов",
+        ];
+        this.result = false;
+        return false;
+      }
+    },
+
+    submitToResult() {
+      // Проверяем, поля формы. Дожны быть все заполнены
+      if (this.validInputsEmpty()) {
+        // Если валидация полей прошла, проверяем количество кустов и рядов
+        // Должно быть рядов меньше или равно количеству кустов
+        if (this.validRowsbushes()) {
+          // меняем состояние на нажатое
+          this.result = true;
+
+          // Очищаем список ошибок
+          this.message = [];
+          this.active =
+            Number(this.rows) +
+            Number(this.bushes) +
+            Number(this.distanceBetweenRows) +
+            Number(this.distanceBetweenBushes);
+        }
       }
     },
   },
@@ -182,6 +187,7 @@ export default {
     SelectOptionForm,
     ButtonExp,
     BrnGroup,
+    ResultSeeding,
   },
 };
 </script>
