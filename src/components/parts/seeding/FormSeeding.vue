@@ -29,7 +29,7 @@
           name="Количество кустов"
           idLabel="bushes"
           :modelValue="bushes"
-          @update:modelValue="(e) => (bushes = e)"
+          @update:modelValue="(e) => (bushes = Number(e))"
         />
         <InputForm
           typeInput="number"
@@ -39,7 +39,7 @@
           name="Количество рядов"
           idLabel="rows"
           :modelValue="rows"
-          @update:modelValue="(e) => (rows = e)"
+          @update:modelValue="(e) => (rows = Number(e))"
         />
       </RowInput>
       <RowInput>
@@ -51,7 +51,7 @@
           name="Расстояние между рядов, см"
           idLabel="distanceBetweenRows"
           :modelValue="distanceBetweenRows"
-          @update:modelValue="(e) => (distanceBetweenRows = e)"
+          @update:modelValue="(e) => (distanceBetweenRows = Number(e))"
         />
         <InputForm
           typeInput="number"
@@ -61,7 +61,7 @@
           name="Расстояние между кустов, см"
           idLabel="distanceBetweenBushes"
           :modelValue="distanceBetweenBushes"
-          @update:modelValue="(e) => (distanceBetweenBushes = e)"
+          @update:modelValue="(e) => (distanceBetweenBushes = Number(e))"
         />
       </RowInput>
       <BrnGroup>
@@ -101,8 +101,8 @@ export default {
       currentSort: "default",
       distanceBetweenRows: "",
       distanceBetweenBushes: "",
-      bushes: "1",
-      rows: "1",
+      bushes: 1,
+      rows: 1,
       active: 1,
       result: false,
     };
@@ -146,7 +146,7 @@ export default {
     },
     // Проверяет, что бы количество кустов небыло меньше количества рядов
     validRowsbushes() {
-      if (this.bushes <= this.rows) {
+      if (this.bushes >= this.rows) {
         this.messages = [];
         return true;
       } else {
