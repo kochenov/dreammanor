@@ -17,9 +17,30 @@
     <aside class="sidebar">
       <div class="box">
         <TabsWrap
+          v-if="isComponent === 'FormSeeding'"
           :box-components="[
             {
-              title: 'Посев овощей',
+              title: 'Овощи для расчётов',
+              flag: '',
+            },
+          ]"
+        >
+          <ListVegetable
+            @setVegetableId="
+              (e) => {
+                setVegetableId(e);
+              }
+            "
+            :data="vegetables"
+            :currentID="vegetableId"
+          />
+          {{ test }}
+        </TabsWrap>
+        <TabsWrap
+          v-if="isComponent === 'HistorySeeding'"
+          :box-components="[
+            {
+              title: 'Фильтр по овощам',
               flag: '',
             },
           ]"
@@ -73,7 +94,7 @@ export default {
       componens: [
         {
           nameComponent: "FormSeeding",
-          title: "Калькулятор посева овощей",
+          title: "Калькулятор размера грядок",
           menu: "Расчёт",
           flag: "",
         },
@@ -101,6 +122,7 @@ export default {
     }),
   },
   mounted() {
+    //this.vegetables.length == 0 ? this.loadVegetables() : null;
     this.loadVegetables();
   },
 };

@@ -21,7 +21,7 @@ export default {
   mutations: {
     // Массив списка сортов текущего овоща
     setVegetables: (state, vegetables) => {
-      state.vegetables = [...state.vegetables, ...vegetables];
+      state.vegetables = vegetables;
     },
     // Установка выбранного овоща
     setVegetableId: (state, id) => {
