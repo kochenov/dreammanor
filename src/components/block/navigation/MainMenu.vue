@@ -388,6 +388,9 @@ export default {
     list-style: none;
   }
   width: 100%;
+  @include screen-size(sm) {
+    width: 100vw;
+  }
   // Главное меню
   &__menu {
     @include screen-size(sm) {
