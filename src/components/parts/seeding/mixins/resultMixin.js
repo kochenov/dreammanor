@@ -4,6 +4,7 @@ export default {
       height: null,
       width: null,
       oneRows: null,
+      zoom: 1.5,
     };
   },
   methods: {
@@ -19,17 +20,19 @@ export default {
     },
     // Рисуем
     canvasRef(refCanvas, canvasRow) {
+      // Маштаб
+
       let сanvasEl = refCanvas; // this.$refs.canvas;
-      сanvasEl.setAttribute("width", Math.ceil(this.height / 2));
+      сanvasEl.setAttribute("width", Math.ceil(this.height / this.zoom));
       // Растягиваем полотно по высоте
-      сanvasEl.setAttribute("height", Math.ceil(this.width / 2));
+      сanvasEl.setAttribute("height", Math.ceil(this.width / this.zoom));
       let canvas = сanvasEl.getContext("2d");
       // Рисуем прямоугольник
       canvas.strokeRect(
         0,
         0,
-        Math.ceil(this.height / 2),
-        Math.ceil(this.width / 2)
+        Math.ceil(this.height / this.zoom),
+        Math.ceil(this.width / this.zoom)
       );
       this.canvasRow(canvas);
       setTimeout(() => {
@@ -61,8 +64,8 @@ export default {
       }
     },
     createImage(canvas, r, l) {
-      l = l / 2;
-      r = r / 2;
+      l = l / this.zoom;
+      r = r / this.zoom;
       var circle = new Path2D();
       //circle.moveTo(125, 35);
       circle.arc(l, r, 2, 0, 2 * Math.PI);
