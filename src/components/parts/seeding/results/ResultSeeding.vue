@@ -75,7 +75,7 @@
 
     <div class="picture" v-show="width !== 0 && height !== 0">
       <h3>Схема грядки</h3>
-      <BrnGroup>
+      <BrnGroup class="sm-hiden">
         <ButtonExp
           @click.prevent="zoomAction()"
           class="btn-outline btn-modal-mini btn-yellow"
@@ -197,15 +197,17 @@ export default {
 .res-ogorod {
   border-top: 1px solid #ccccccba;
   padding: 20px 80px;
+  font-size: 13rem;
   @include screen-size(sm) {
     padding: 10px 0px;
+    font-size: 11rem;
   }
   margin-top: 20px;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  font-size: 13rem;
+
   font-weight: 600;
   font-style: italic;
 
@@ -233,5 +235,16 @@ export default {
   width: auto;
   margin: 0 auto;
   box-shadow: 0 0 3px rgb(0, 0, 0);
+}
+.sm-hiden {
+  @include screen-size(sm) {
+    display: none;
+  }
+}
+#canvas,
+.picture {
+  @include screen-size(sm) {
+    width: 100%;
+  }
 }
 </style>
