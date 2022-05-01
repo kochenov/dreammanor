@@ -69,6 +69,9 @@ $promo-info-link-color1: rgb(245, 250, 255);
     text-decoration: none;
     color: $promo-info-link-color1;
     font-size: 13px;
+    @include screen-size(sm) {
+      font-size: 12px;
+    }
     span {
       padding-left: 4px;
     }
