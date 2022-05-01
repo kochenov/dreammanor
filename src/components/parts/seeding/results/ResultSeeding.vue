@@ -75,6 +75,20 @@
 
     <div class="picture" v-show="width !== 0 && height !== 0">
       <h3>Схема грядки</h3>
+      <BrnGroup>
+        <ButtonExp
+          @click.prevent="zoomAction()"
+          class="btn-outline btn-modal-mini btn-yellow"
+        >
+          -
+        </ButtonExp>
+        <ButtonExp
+          @click.prevent="zoomAction(true)"
+          class="btn-outline btn-modal-mini btn-yellow"
+        >
+          +
+        </ButtonExp>
+      </BrnGroup>
       <canvas ref="canvas" id="canvas"></canvas>
     </div>
   </div>
@@ -137,8 +151,22 @@ export default {
       this.resultShow();
       this.canvasRef(this.$refs.canvas, this.$refs.canvasRow);
     },
+    zoomAction(minus = false) {
+      if (minus === true) {
+        this.zoom = this.zoom - 0.2 < 0 ? 0.1 : this.zoom - 0.2;
+      } else {
+        this.zoom = this.zoom + 0.2 > 3 ? 3 : this.zoom + 0.2;
+      }
+      this.canvasRef(this.$refs.canvas, this.$refs.canvasRow);
+    },
   },
-  components: { ButtonExp, BrnGroup, InputForm, ModalWindow, FleshMesseges },
+  components: {
+    ButtonExp,
+    BrnGroup,
+    InputForm,
+    ModalWindow,
+    FleshMesseges,
+  },
 };
 </script>
 
