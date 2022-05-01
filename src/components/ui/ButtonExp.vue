@@ -63,4 +63,11 @@ export default {
 .btn-modal {
   padding: 6px 80px;
 }
+.btn-modal-mini {
+  padding: 6px 25px;
+}
+.btn-yellow {
+  border-color: #c0ad03;
+  color: #e4ce00;
+}
 </style>
