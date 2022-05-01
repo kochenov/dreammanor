@@ -3,6 +3,7 @@ export default [
     path: "/",
     name: "home",
     meta: {
+      title: "Социальная сеть фермеров, сельских жителей и дачников",
       layout: "index",
       parent: "home",
     },
@@ -353,6 +354,7 @@ export default [
     path: "/calculation/seeding",
     name: "seeding",
     meta: {
+      title: "Калькулятор расчёта размера грядок овощей",
       layout: "index",
       parent: "seeding",
       breadcrumbs: [
@@ -361,7 +363,7 @@ export default [
           url: "/calculation",
         },
         {
-          name: "Калькулятор посева томатов / выращивание томатов по технологии",
+          name: "Калькулятор расчёта грядок овощей",
           url: "/seeding",
         },
       ],
@@ -429,6 +431,7 @@ export default [
     path: "/calculation/all-users",
     name: "calculationAllUsers",
     meta: {
+      title: "Последние расчёты посльзователей социальной сети",
       layout: "index",
       parent: "seeding",
       breadcrumbs: [
