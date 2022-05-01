@@ -4,9 +4,7 @@
       <h2>Сайт находится на стадии глубокой разработки</h2>
       <p>Просим протестировать страницу расчёта размера грядок</p>
       <div class="wr-link">
-        <router-link to="/calculation/seeding">
-          Страница расчёта грядок</router-link
-        >
+        <router-link to="/calculation/seeding"> Расчёт грядок</router-link>
       </div>
     </div>
   </div>
