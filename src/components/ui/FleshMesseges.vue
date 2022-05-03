@@ -52,7 +52,7 @@ export default {
   color: rgb(0, 132, 255);
   border: 1px solid rgb(0, 132, 255);
 }
-.aletr {
+.alert {
   color: rgb(220, 170, 30);
   border: 1px solid rgb(220, 170, 30);
 }
