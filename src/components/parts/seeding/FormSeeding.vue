@@ -7,7 +7,12 @@
         'Не удалось получить данные с сервера! Проверьте интернет соединение...',
       ]"
     />
-    <FormGrid>
+    <FleshMesseges
+      v-if="loadVegetablesStatus"
+      type="alert"
+      :messages="['Загрузка данных с сервера...']"
+    />
+    <FormGrid v-else>
       <RowInput>
         <SelectForm
           :modelValue="currentSort"
@@ -111,6 +116,7 @@ export default {
   computed: {
     ...mapState({
       errorDataApi: (state) => state.seeding.errorDataApi,
+      loadVegetablesStatus: (state) => state.seeding.loadVegetablesStatus,
     }),
     ...mapGetters({
       sorts: "getSorts",

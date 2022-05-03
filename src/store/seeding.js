@@ -5,6 +5,8 @@ export default {
     vegetableId: 1, // Данные текущего овоща
     vegetables: [], // список овощей
     errorDataApi: false, // Если данные не прогрузились
+    url: "https://api.dreammanor.ru", // http://127.0.0.1:8000
+    loadVegetablesStatus: true, // Пока идёт загрузка показывать банер загрузки
   },
   getters: {
     // Список сортов текущего овоща
@@ -33,10 +35,10 @@ export default {
     },
   },
   actions: {
-    loadVegetables({ commit }) {
+    loadVegetables({ commit, state }) {
       axios({
         method: "GET",
-        url: `http://127.0.0.1:8000/api/V1/vegetable`,
+        url: `${state.url}/api/V1/vegetable`,
         //params: {},
         //data: {},
         headers: {
@@ -53,6 +55,7 @@ export default {
         .finally(() => {
           //console.log(state.errorDataApi);
           //commit("setErrorApi", false);
+          state.loadVegetablesStatus = false;
         });
     },
   },
