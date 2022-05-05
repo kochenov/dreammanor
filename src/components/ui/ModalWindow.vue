@@ -37,6 +37,10 @@ export default {
   background: white;
   border-radius: 8px;
   padding: 25px 25px 10px 25px;
+  @include screen-size(sm) {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 
   h3 {
     font-size: 18rem;
