@@ -506,7 +506,7 @@ export default [
       parent: "account",
       layout: "index",
     },
-    component: () => import("../views/DefaultPage.vue"),
+    component: () => import("../views/LoginPage.vue"),
   },
   {
     path: "/registration",

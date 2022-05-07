@@ -13,7 +13,7 @@ import VueAxios from "vue-axios";
 library.add(fas);
 
 const app = createApp(App);
-
+axios.defaults.withCredentials = true;
 app
   .use(store)
   .use(router)
