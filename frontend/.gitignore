@@ -29,5 +29,3 @@ yarn-error.log*
 *.sln
 *.mp4
 *.mov
-
-*/__pycache__/

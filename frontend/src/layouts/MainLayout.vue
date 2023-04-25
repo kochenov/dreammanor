@@ -232,36 +232,48 @@
         <AddNews />
         <router-view />
       </q-page>
+    <MenuItems/>
     </q-page-container>
+
     <q-footer elevated class="bg-grey-10 text-white">
       <q-toolbar class="flex flex-center">
         Усадьба Мечты &copy; 2023
       </q-toolbar>
     </q-footer>
   </q-layout>
+
 </template>
 
 <script setup>
 import { useAuthStore, useNewsStore } from "src/stores/all";
 
-import { ref } from "vue";
+import { ref , onMounted} from "vue";
 import TopMenu from "../components/navs/menu/TopMenu.vue";
 import SubMenu from "../components/navs/menu/SubMenu.vue";
 import HeaderPromo from "../components/promo/HeaderPromo.vue";
 import BreadcrumbsHeader from "../components/navs/BreadcrumbsHeader.vue";
 import LeftPart from "../components/parts/LeftPart.vue";
 import { defineAsyncComponent } from "vue";
+import MenuItems from "src/modules/menu/components/menuItems.vue";
+
+
 
 const AddNews = defineAsyncComponent(() =>
   import("src/modules/news/components/admin/newPost.vue")
 );
 
+
+
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);
+
 const authStore = useAuthStore();
 const newsStore = useNewsStore();
+
+
 const tab = ref("home");
 const subMenuMobail = ref(null);
+
 
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value;
@@ -270,6 +282,10 @@ const toggleRightDrawer = () => {
   rightDrawerOpen.value = !rightDrawerOpen.value;
   subMenuMobail.value = null;
 };
+
+
+
+
 </script>
 <style lang="scss">
 .my-menu-link {
