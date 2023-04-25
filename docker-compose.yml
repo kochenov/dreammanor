@@ -1,0 +1,124 @@
+version: "3"
+services:
+  db:
+    image: postgres:15
+    container_name: db_app
+    command: -p 1221
+    volumes:
+      - ./database/postgres:/var/lib/postgresql/data
+    expose:
+      - 1221
+    env_file:
+      - ./backend/.env-non-dev
+
+  redis:
+    image: redis:latest
+    container_name: redis_app
+    ports:
+      - "6379:6379"
+    #volumes:
+    #  - redis_data:/data
+
+  backend:
+    build:
+      context: ./backend
+    env_file:
+      - ./backend/.env-non-dev
+    environment:
+      - DOMAIN=api.dreammanor.ru
+      - FASTAPI_ENVIRONMENT=production
+      - FASTAPI_HTTPS_REDIRECT=true
+      - FASTAPI_SSL_CERT_FILE=/etc/letsencrypt/live/api.dreammanor.ru/fullchain.pem
+      - FASTAPI_SSL_KEY_FILE=/etc/letsencrypt/live/api.dreammanor.ru/privkey.pem
+    container_name: fastapi_app
+    command: ["/fastapi_app/docker/app.sh"]
+    ports:
+      - 8000:8000
+    volumes:
+      - ./files:/fastapi_app/files:rw
+      - /etc/letsencrypt/:/etc/letsencrypt/
+    restart: always
+    depends_on:
+      - db
+      - redis
+
+  celery:
+    build:
+      context: ./backend
+    env_file:
+      - ./backend/.env-non-dev
+    container_name: celery_app
+    command: ["/fastapi_app/docker/celery.sh", "celery"]
+    environment:
+    - REDIS_HOST=redis
+    - REDIS_PORT=6379
+    volumes:
+      - /chromedriver_cache:/root/.wdm/drivers/chromedriver
+    restart: always
+    depends_on:
+      - redis
+  flower:
+    build:
+      context: ./backend
+    env_file:
+      - ./backend/.env-non-dev
+    container_name: flower_app
+    command: ["/fastapi_app/docker/celery.sh", "flower"]
+    depends_on:
+      - redis
+      - celery
+    ports:
+      - 8888:5555
+    restart: always
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend_quasar
+    ports:
+      - 8080:8080
+    depends_on:
+      - backend
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - /etc/letsencrypt/:/etc/letsencrypt/
+    command: "quasar serve --host 0.0.0.0  --https --port 8080 --history --silent --cert /etc/letsencrypt/live/dreammanor.ru/cert.pem --key /etc/letsencrypt/live/dreammanor.ru/privkey.pem"
+  nginx:
+    image: nginx:alpine
+    container_name: nginx_app
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./files:/fastapi_app/files:rw
+      - /etc/letsencrypt/:/etc/letsencrypt/
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - frontend
+      - backend
+    restart: always
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    env_file:
+      - ./backend/.env-non-dev
+    ports:
+      - "999:80"
+    restart: always
+  selenium-hub:
+    image: selenium/hub:latest
+    container_name: selenium-hub
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"
+      
+  chrome:
+    image: selenium/node-chrome:beta
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443

@@ -1,0 +1,34 @@
+.env
+.env-non-dev
+.idea
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+build/
+dist/
+eggs/
+src/*.egg-info/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# IDEs and editors
+.idea
+.vscode
+*.sublime-workspace
+*.iml
+Thumbs.db
+.DS_Store
+
+# Database
+database/
