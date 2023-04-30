@@ -1,10 +1,12 @@
 import { defineStore } from "pinia";
+import { serviceNode } from "src/services/Service";
 
 export const useNavigationsStore = defineStore("navigations", {
   state: () => ({
     breadscrumbs: [],
     curendDinamicPage: null,
     current_title: null,
+    node: null,
   }),
   getters: {
     navBread: (state) =>
@@ -24,5 +26,13 @@ export const useNavigationsStore = defineStore("navigations", {
     addRoutes(arr) {
       this.curendDinamicPage = [{ ...arr }];
     },
+    async loadNode(fullPath){
+      try {
+        let res = await serviceNode.get_node(fullPath);
+        this.node = res.data;
+      } catch (error) {
+        console.log(error);
+      }
+    }
   },
 });

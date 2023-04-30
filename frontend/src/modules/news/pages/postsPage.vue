@@ -13,18 +13,18 @@
   >
     <div
       v-if="
-        current_component == 'all-posts' || current_component == 'popular-posts'
+        current_component == 'last' || current_component == 'popular'
       "
     >
       <PostsComponent :posts="posts" :load="newsStore.loading" />
     </div>
-    <div v-if="current_component == 'news-categories'">
+    <div v-if="current_component == 'categories'">
       <CategoryList />
     </div>
 
     <div
       v-if="
-        current_component == 'all-posts' || current_component == 'popular-posts'
+        current_component == 'last' || current_component == 'popular'
       "
       class="q-mt-xl"
     >
@@ -49,37 +49,36 @@
 import { ref, onMounted, watch, onUpdated } from "vue";
 import TabsConteiner from "src/components/blocks/tabs/TabsConteiner.vue";
 import { useRoute } from "vue-router";
-import PostsComponent from "../components/PostsComponent.vue";
+import PostsComponent from "../components/parts/PostsComponent.vue";
 import CategoryList from "../components/CategoriesComponent.vue";
-import { setBreadscrumbs, setMetaTitle } from "src/services/Service";
+import { setBreadscrumbs } from "src/services/Service";
 import { useNewsStore } from "../store";
-import { useMeta } from "quasar";
 
-const current_component = ref("all-posts");
+const current_component = ref("last");
 const component_lists = [
   {
-    name_component: "all-posts", // Имя файла компонента
+    name_component: "last", // Имя файла компонента
     title: "Последние новости", // Заголовок текущего компонента
     sub_title: "Свежие новости из всех категорий в одном месте",
     text_btn: "Последние", // Имя вкладки
     flag: "box-news",
-    to: "/news/posts/all-posts",
+    to: "/news/posts/last",
   },
   {
-    name_component: "popular-posts", // Имя файла компонента
+    name_component: "popular", // Имя файла компонента
     title: "Популярные новости", // Заголовок текущего компонента
     sub_title: "Рейтинг самых популярных новостей",
     text_btn: "Популярные", // Имя вкладки
     flag: "box-news",
-    to: "/news/posts/popular-posts",
+    to: "/news/posts/popular",
   },
   {
-    name_component: "news-categories", // Имя файла компонента
+    name_component: "categoryes", // Имя файла компонента
     title: "Категории новостей", // Заголовок текущего компонента
     sub_title: "Список всех новостных категорий",
     text_btn: "Категории", // Имя вкладки
     flag: "box-news",
-    to: "/news/posts/news-categories",
+    to: "/news/posts/categoryes",
   },
 ];
 
@@ -93,7 +92,7 @@ const meta_title = ref(null);
 onMounted(async () => {
   await loadPosts();
 
-  current_component.value = route.params.id_component;
+  current_component.value = route.params.component;
   current_page.value = 1;
 });
 watch(route, async () => {
@@ -116,7 +115,7 @@ onUpdated(() => {
  */
 
 const loadPosts = async (page = 0) => {
-  if (route.params.id_component == "all-posts") {
+  if (route.params.component == "last") {
     meta_title.value = "Самые свежие новости из всех категорий";
     let offset = 0;
     if (page != 0) {
@@ -125,7 +124,7 @@ const loadPosts = async (page = 0) => {
 
     await newsStore.loadPosts(0, offset, 0);
   }
-  if (route.params.id_component == "popular-posts") {
+  if (route.params.component == "popular") {
     meta_title.value = "Популярные новости из всех категорий";
     let offset = 0;
     if (page != 0) {
@@ -133,7 +132,7 @@ const loadPosts = async (page = 0) => {
     }
     await newsStore.loadPosts(0, offset, 1);
   }
-  if (route.params.id_component == "news-categories") {
+  if (route.params.component == "categories") {
     meta_title.value = "Список категорий новостей";
     //await newsStore.loadPosts();
   }
@@ -158,11 +157,6 @@ const updateBreadscrumbs = (title) => {
     true
   );
 };
-useMeta(() => {
-  return {
-    title: meta_title.value + " : Усадьба Мечты",
-  };
-});
 </script>
 
 <style lang="scss" scoped></style>

@@ -28,11 +28,11 @@
 import { ref, onMounted, onActivated } from "vue";
 import TabsConteiner from "src/components/blocks/tabs/TabsConteiner.vue";
 //import CategoryList from "../components/CategoriesComponent.vue";
-import FullPost from "../components/PostComponent.vue";
+import FullPost from "../components/parts/PostComponent.vue";
 import { useRoute } from "vue-router";
 import { useNewsStore } from "../store";
 
-import { setBreadscrumbs, setMetaTitle } from "src/services/Service";
+import { setBreadscrumbs } from "src/services/Service";
 import { useMeta } from "quasar";
 
 const newsStore = useNewsStore();

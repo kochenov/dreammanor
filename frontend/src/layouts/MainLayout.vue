@@ -30,7 +30,11 @@
         <q-space />
 
         <q-btn
-          v-if="authStore.user && authStore.user.id && authStore.user.is_superuser == true"
+          v-if="
+            authStore.user &&
+            authStore.user.id &&
+            authStore.user.is_superuser == true
+          "
           color="primary"
           outline
           dense
@@ -232,7 +236,7 @@
         <AddNews />
         <router-view />
       </q-page>
-    <MenuItems/>
+      <MenuItems />
     </q-page-container>
 
     <q-footer elevated class="bg-grey-10 text-white">
@@ -241,28 +245,27 @@
       </q-toolbar>
     </q-footer>
   </q-layout>
-
 </template>
 
 <script setup>
 import { useAuthStore, useNewsStore } from "src/stores/all";
 
-import { ref , onMounted} from "vue";
+import { ref, onMounted } from "vue";
 import TopMenu from "../components/navs/menu/TopMenu.vue";
 import SubMenu from "../components/navs/menu/SubMenu.vue";
 import HeaderPromo from "../components/promo/HeaderPromo.vue";
 import BreadcrumbsHeader from "../components/navs/BreadcrumbsHeader.vue";
 import LeftPart from "../components/parts/LeftPart.vue";
 import { defineAsyncComponent } from "vue";
-import MenuItems from "src/modules/menu/components/menuItems.vue";
+import MenuItems from "src/modules/menu/components/MenuItems.vue";
+import { useNavigationsStore } from "src/stores/navigations";
+import { useMeta } from "quasar";
 
-
+const navigations = useNavigationsStore();
 
 const AddNews = defineAsyncComponent(() =>
   import("src/modules/news/components/admin/newPost.vue")
 );
-
-
 
 const leftDrawerOpen = ref(false);
 const rightDrawerOpen = ref(false);
@@ -270,10 +273,8 @@ const rightDrawerOpen = ref(false);
 const authStore = useAuthStore();
 const newsStore = useNewsStore();
 
-
 const tab = ref("home");
 const subMenuMobail = ref(null);
-
 
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value;
@@ -282,10 +283,33 @@ const toggleRightDrawer = () => {
   rightDrawerOpen.value = !rightDrawerOpen.value;
   subMenuMobail.value = null;
 };
+const meta = navigations.node;
+if(navigations.node.slug = false){
 
+}
 
+useMeta(() => {
+  return {
+    title: navigations.node.title + ": Усадьба Мечты",
+    meta: {
+      description: {
+        name: "description",
+        content: navigations.node.description,
+      },
+      keywords: {
+        name: "keywords",
+        content: navigations.node.keywords,
+      },
 
-
+    },
+    link: {
+      canonical: {
+        rel: "canonical",
+        href: navigations.node.canonical_full_url,
+      },
+    },
+  };
+});
 </script>
 <style lang="scss">
 .my-menu-link {

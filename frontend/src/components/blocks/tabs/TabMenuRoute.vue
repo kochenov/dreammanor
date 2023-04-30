@@ -24,7 +24,7 @@
           color="secondary"
           square
           :outline="
-            $route.params.id_component === item.name_component.toLowerCase()
+            $route.params.component === item.name_component.toLowerCase()
               ? false
               : true
           "

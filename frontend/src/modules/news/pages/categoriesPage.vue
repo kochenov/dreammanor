@@ -43,7 +43,7 @@
 import { ref, onUpdated, onMounted, watch } from "vue";
 import TabsConteiner from "src/components/blocks/tabs/TabsConteiner.vue";
 import { useRoute } from "vue-router";
-import PostsComponent from "../components/PostsComponent.vue";
+import PostsComponent from "../components/parts/PostsComponent.vue";
 import CategoryList from "../components/CategoriesComponent.vue";
 import { useNewsStore } from "../store";
 import { setBreadscrumbs } from "src/services/Service";

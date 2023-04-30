@@ -22,10 +22,9 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from "vue";
+import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useNavigationsStore } from "stores/navigations";
-import { useMeta } from "quasar";
 import TabMenuComponent from "./TabMenuComponent.vue";
 import TabMenuRoute from "./TabMenuRoute.vue";
 
@@ -53,7 +52,7 @@ const getTitle = () => {
   let component = null;
   if (props.nav_route) {
     component = props.component_lists.find(
-      (o) => o.name_component.toLowerCase() === route.params.id_component
+      (o) => o.name_component.toLowerCase() === route.params.component
     );
   } else {
     component = props.component_lists.find((o) => {
@@ -62,7 +61,7 @@ const getTitle = () => {
       }
     });
   }
-  if (route.params.id_component === "") {
+  if (route.params.component === "") {
     router.push({ path: props.component_lists[0].to });
   }
   if (component) {
@@ -74,8 +73,8 @@ const getTitle = () => {
   } else {
     if (props.nav_route) {
       if (
-        route.params.id_component !== "" &&
-        typeof route.params.id_component != "undefined"
+        route.params.component !== "" &&
+        typeof route.params.component != "undefined"
       ) {
         router.replace({ path: "/404" });
       }
@@ -87,7 +86,7 @@ const getSubTitle = () => {
   let component = null;
   if (props.nav_route) {
     component = props.component_lists.find(
-      (o) => o.name_component.toLowerCase() === route.params.id_component
+      (o) => o.name_component.toLowerCase() === route.params.component
     );
   } else {
     component = props.component_lists.find((o) => {

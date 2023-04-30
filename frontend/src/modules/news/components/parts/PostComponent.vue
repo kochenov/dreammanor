@@ -75,7 +75,7 @@
 import { wordNum } from "/src/helpers/word";
 
 import { ref, onMounted } from "vue";
-import { useNewsStore } from "../store";
+import { useNewsStore } from "../../store";
 import { useRoute } from "vue-router";
 import { date } from "quasar";
 const newsStore = useNewsStore();

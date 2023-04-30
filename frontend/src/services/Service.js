@@ -1,5 +1,14 @@
 import { useNavigationsStore } from "stores/navigations";
 import { useMeta } from "quasar";
+import { api } from "boot/axios";
+
+/*
+ * Добавьте перехватчик ответов
+ */
+api.interceptors.response.use(
+  (response) => response,
+  (error) => Promise.reject(error)
+);
 
 /**
  * Добавление элнментов в модуль Хлебных крошек
@@ -32,4 +41,15 @@ export const setMetaTitle = (srt_title, prev_str = " : Усадьба Мечты
       title: srt_title + prev_str,
     };
   });
+};
+
+export const serviceNode = {
+  async get_node(fullPath){
+    try {
+      let res = await api.get(`/node/${fullPath}`);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
