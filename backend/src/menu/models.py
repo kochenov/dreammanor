@@ -10,6 +10,8 @@ class MenuItem(Base):
     name = Column(String(255), nullable=False)
     # ссылка на сущность
     url = Column(String(255), nullable=False)
+    # icon
+    icon = Column(String(255))
     # 1 - super user; 2- admin; 3-user; 0 гость
     role_id = Column(Integer, nullable=True, default=0)
     # id родителя

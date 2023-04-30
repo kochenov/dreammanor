@@ -20,6 +20,7 @@ from news.router import router as router_news
 from realty.router import router as router_realty
 from pars.router import router as router_pars
 from menu.router import router as router_menu
+from node.router import router as router_node
 
 env = os.getenv("APP_ENV", "production")
 
@@ -62,6 +63,7 @@ app.include_router(router_pars)
 app.include_router(router_realty)
 app.include_router(router_news)
 app.include_router(router_menu)
+app.include_router(router_node)
 
 
 class SitemapURLs(BaseModel):

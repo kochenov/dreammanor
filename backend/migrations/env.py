@@ -16,6 +16,7 @@ from src.realty.models import *
 from src.news.models import *
 from src.pars.models import *
 from src.menu.models import *
+from src.node.models import *
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
