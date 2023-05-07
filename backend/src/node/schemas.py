@@ -5,11 +5,11 @@ from pydantic import BaseModel
 
 
 class NodeBase(BaseModel):
-    url: Optional[str] 
+    url: Optional[str]
     module: Optional[str]
     component: Optional[str]
     page: Optional[str]
-    slug: Optional[bool]
+    slug: Optional[bool] = False
     title: Optional[str]
     sub_title: Optional[str]
     description: Optional[str]
@@ -31,7 +31,13 @@ class NodeRead(NodeBase):
 
 class NodeResponseRead(BaseModel):
     status: str
-    data: NodeRead = None
+    data: NodeRead
+    message: str
+
+
+class NodesResponseRead(BaseModel):
+    status: str
+    data: list[NodeRead]
     message: str
 
 

@@ -1,7 +1,6 @@
 import { boot } from "quasar/wrappers";
 import { useNavigationsStore } from "src/stores/navigations";
 import { useAuthStore } from "stores/all";
-import { ref } from "vue";
 
 export default boot(async ({ router }) => {
   // Маршруты для гостей
@@ -15,8 +14,8 @@ export default boot(async ({ router }) => {
   router.beforeEach(async (to, from) => {
     const authStore = useAuthStore();
     const navigation = useNavigationsStore();
-    console.log(to);
-    navigation.load(from.fullPath);
+    console.log(to.meta);
+    navigation.loadNode(to.params.slug ? `/${to.meta.module.path}/${to.meta.page.path}/${to.params.component}/slug` : to.fullPath);
 
     if (
       to.fullPath == "/login" ||

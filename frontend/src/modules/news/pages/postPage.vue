@@ -67,7 +67,7 @@ const component_lists = ref([
 const route = useRoute();
 const post = ref(null);
 onMounted(async () => {
-  await newsStore.getPost(route.params.category_id, route.params.post_id);
+  await newsStore.getPost(route.params.slug);
   if (newsStore.posts) {
     post.value = newsStore.posts;
     load();
@@ -101,7 +101,7 @@ const updateBreadscrumbs = (title) => {
 };
 const load = () => {
   if (post.value) {
-    updateBreadscrumbs(post.value.title);
+    //updateBreadscrumbs(post.value.title);
 
     component_lists.value[0].title = post.value.title;
     component_lists.value[0].sub_title = post.value.category.name;

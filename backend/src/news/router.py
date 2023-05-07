@@ -69,10 +69,10 @@ async def get_news(category: int = 0, limit: int = 1, offset: int = 0,
         })
 
 
-@router.get("/category/{category_id}/post/{post_id}")
-async def get_news_post(category_id: int, post_id: int, session: AsyncSession = Depends(get_async_session)):
+@router.get("/{post_id}")
+async def get_news_post(post_id: int, session: AsyncSession = Depends(get_async_session)):
     try:
-        query = select(Post).where(Post.id == post_id, Post.category_id == category_id).options(
+        query = select(Post).where(Post.id == post_id).options(
             selectinload(Post.category))
         result = await session.execute(query)
         result = result.scalars().first()

@@ -32,9 +32,9 @@ export const news = {
    * @param {*} post_id
    * @returns
    */
-  async get_news_post(category_id, post_id) {
+  async get_news_post(post_id) {
     try {
-      let res = await api.get(`/news/category/${category_id}/post/${post_id}`);
+      let res = await api.get(`/news/${post_id}`);
       return res.data.data;
     } catch (error) {
       console.log(error.message);

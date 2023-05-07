@@ -72,9 +72,9 @@ export const useNewsStore = defineStore("newsStore", {
       } catch (error) {}
     },
 
-    async getPost(category_id, post_id) {
+    async getPost(post_id) {
       try {
-        this.posts = await news.get_news_post(category_id, post_id);
+        this.posts = await news.get_news_post(post_id);
       } catch (error) {
         console.log(error.message);
       }

@@ -10,7 +10,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_async_session
 from node.models import Node
-from node.schemas import NodeBase, NodeRead, NodeResponseRead, NodeResponseUpdate
+from node.schemas import NodeBase, NodeRead, NodeResponseRead, NodesResponseRead, NodeResponseUpdate
 
 router = APIRouter(
     prefix="/node",
@@ -37,7 +37,6 @@ async def create_node_item(node_item: NodeBase, session: AsyncSession = Depends(
             "data": None,
             "message": "Такая сущность уже есть: Измените адрес"
         })
-    
 
 
 @router.get("/{node_url:path}", response_model=NodeResponseRead)
@@ -45,7 +44,7 @@ async def get_node(node_url: str, session: AsyncSession = Depends(get_async_sess
     """Список объявлений"""
     try:
         """ """
-        #decoded_url = "/".join([urllib.parse.unquote(segment) for segment in node_url.split("/")])
+        # decoded_url = "/".join([urllib.parse.unquote(segment) for segment in node_url.split("/")])
 
         query = select(Node).filter(Node.url == node_url)
         result = await session.execute(query)
@@ -99,7 +98,7 @@ async def delete_node_item(node_item_id: int, session: AsyncSession = Depends(ge
     pass
 
 
-@router.get("/", response_model=NodeResponseRead)
+@router.get("/", response_model=NodesResponseRead)
 async def read_node_items(skip: int = 0, limit: int = 100, session: AsyncSession = Depends(get_async_session)):
     """ Выводит список пунктов меню """
     try:
