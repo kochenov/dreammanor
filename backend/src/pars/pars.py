@@ -151,7 +151,7 @@ def getWebDriver():
     options.add_argument("--disable-default-apps")
     options.add_argument("--disable-translate")
 
-    executor = 'http://45.9.42.70:4444/wd/hub'
+    executor = 'http://dreammanor.ru:4444/wd/hub'
 
     return webdriver.Remote(command_executor=executor, desired_capabilities=options.to_capabilities())
 
